@@ -17,11 +17,6 @@
                     <ve-line :data="chartData" :settings="chartSettings" height="500px" ref="timeline"></ve-line>
                 </el-card>
               </el-tab-pane>
-              <!--<el-tab-pane label="性能图表" name="summary">-->
-                  <!--<div>-->
-                      <!--<ve-pie ref="pie" :data="funcData" height="500px"></ve-pie>-->
-                  <!--</div>-->
-              <!--</el-tab-pane>-->
             </el-tabs>
         </div>
     </d2-container>
@@ -56,7 +51,7 @@ export default {
     },
     created() {
         getTimeLine({
-            path: '/Users/yangs/Desktop/htrace/trace.out',
+            path: '/Users/yangs/Desktop/trace.out',
             count: 100,
             name: 'DFSInputStream#byteArrayRead'
         }).then(res => {
@@ -64,7 +59,7 @@ export default {
             // this.chartData.stack.func = res.columns
         });
         getFuncFeature({
-            path: '/Users/yangs/Desktop/htrace/trace.out'
+            path: '/Users/yangs/Desktop/trace.out'
         }).then(res => {
             this.funcData['columns'] = ['name', 'total'];
             this.funcData['rows'] = res;

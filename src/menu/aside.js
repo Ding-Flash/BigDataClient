@@ -21,10 +21,8 @@ export default [
     title: 'HDFS',
     icon: 'database',
     children: [
-      { path: '/hdfs/task', title: 'new task', icon: 'tasks'},
-      { path: '/hdfs/hist', title: 'report history', icon: 'clock-o' },
-      { path: '/hdfs/report', title: 'performance analysis', icon: 'bar-chart-o'},
-      { path: '/hdfs/tree', title: 'call tree', icon: 'tree'}
+      { path: '/hdfs/task', title: "新建任务", icon: 'tasks'},
+      { path: '/hdfs/report', title: "性能分析", icon: 'bar-chart-o'},
     ]
   }
 ]

@@ -2,7 +2,7 @@ import request from "@/plugin/axios"
 
 export function getCallTree(data) {
     return request({
-        url: '/getcalltree',
+        url: '/hdfs/getcalltree',
         method: 'GET',
         params: data
     })
@@ -10,7 +10,7 @@ export function getCallTree(data) {
 
 export function getFuncFeature(data) {
     return request({
-        url: '/getfuncfeature',
+        url: '/hdfs/getfuncfeature',
         method: 'GET',
         params: data
     })
@@ -18,7 +18,7 @@ export function getFuncFeature(data) {
 
 export function getTimeLine(data) {
     return request({
-        url: '/gettimeline',
+        url: '/hdfs/gettimeline',
         method: 'GET',
         params: data
     })

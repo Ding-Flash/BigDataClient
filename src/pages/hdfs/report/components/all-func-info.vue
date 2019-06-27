@@ -122,7 +122,7 @@
         },
         created() {
             getFuncFeature({
-                path: '/Users/yangs/Desktop/htrace/trace.out'
+                path: '/Users/yangs/Desktop/trace.out'
             }).then(res => {
                 this.loading = false;
                 this.funcData = res;

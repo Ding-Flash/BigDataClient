@@ -44,7 +44,7 @@
         name: 'trace-tree',
         created() {
             getCallTree({
-                path: '/Users/yangs/Desktop/htrace/trace.out',
+                path: '/Users/yangs/Desktop/trace.out',
                 func_name: 'dataStreamer'
             }).then(res => {
                 this.loading = false;
