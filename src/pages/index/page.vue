@@ -14,7 +14,7 @@
         <el-form-item label="master IP">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item v-for="(slave, index) in slaves" :label="'slave' + (index + 1)">
+        <el-form-item v-for="(slave, index) in slaves" :label="'slave' + (index + 1)" :key="index">
           <el-input v-model="slave.ip"></el-input>
         </el-form-item>
         <el-form-item>
@@ -56,7 +56,7 @@
     },
     methods: {
       onSubmit() {
-        console.log('submit!');
+        this.$store.commit("")
       },
       addSlave(){
         this.slaves.push({
