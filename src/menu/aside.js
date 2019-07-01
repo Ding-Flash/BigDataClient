@@ -13,8 +13,8 @@ export default [
     title: 'Spark',
     icon: 'bolt',
     children: [
-      { path: '', title: '新建任务', icon: 'tasks'},
-      { path: '', title: '历史报告', icon: 'clock-o' },
+      { path: '/spark/task', title: '新建任务', icon: 'tasks'},
+      { path: '/spark/report', title: '检测报告', icon: 'clock-o' },
     ]
   },
   {

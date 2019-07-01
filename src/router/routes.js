@@ -1,4 +1,5 @@
 import hdfs from './modules/hdfs'
+import spark from './modules/spark'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
@@ -46,7 +47,8 @@ const frameIn = [
       }
     ]
   },
-  hdfs
+  hdfs,
+  spark
 ]
 
 /**

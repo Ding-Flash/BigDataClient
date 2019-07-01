@@ -6,7 +6,7 @@ export default {
   path: '/hdfs',
   name: 'hdfs',
   meta,
-  redirect: { name: 'hdfs-hist' },
+  redirect: { name: 'hdfs-task' },
   component: layoutHeaderAside,
   children: (pre => [
     { path: 'task', name: `${pre}task`, component: () => import('@/pages/hdfs/task/index'), meta: { ...meta, title: '新建任务' } },
