@@ -22,7 +22,6 @@
                                         :expand-all="expandAll"
                                         :horizontal="direct"
                                         :props="props"
-                                        @on-node-click="onNodeClick"
                                 ></org-tree>
                             </div>
                         </el-carousel-item>
@@ -72,9 +71,6 @@
                 return (
                     <el-button type = {b_type} > {data.name}</el-button>
                 )
-            },
-            onNodeClick(e, data) {
-                console.log(data.name)
             }
         }
     }

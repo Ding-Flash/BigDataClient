@@ -29,6 +29,6 @@ util.open = function (url) {
   document.body.appendChild(a)
   a.click()
   document.body.removeChild(document.getElementById('d2admin-link-temp'))
-}
+};
 
 export default util
