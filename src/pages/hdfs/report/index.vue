@@ -5,7 +5,7 @@
         </template>
         <detail/>
         <div style="margin-top: 2%">
-            <el-tabs type="border-card" v-model="activeName">
+            <el-tabs type="border-card" v-model="activeTab" @tab-click="changeTab">
               <el-tab-pane label="function" name="sampler">
                   <all_func></all_func>
               </el-tab-pane>
@@ -35,6 +35,15 @@ export default {
         detail,
         all_func,
     },
+    created() {
+        this.getChartData()
+        getFuncFeature({
+            path: '/Users/yangs/Desktop/trace.out'
+        }).then(res => {
+            this.funcData['columns'] = ['name', 'total'];
+            this.funcData['rows'] = res;
+        })
+    },
     data() {
       return {
           activeName: 'sampler',
@@ -47,38 +56,44 @@ export default {
           funcData:{}
       }
     },
-    methods: {
+    computed:{
+        activeTab: {
+            get: function () {
+                return this.$store.state.hdfs.activeTab
+            },
+            set: function (value) {
+                this.$store.commit("hdfs/setActiveTab", value)
+            }
+        },
+        selectFunc(){
+            return this.$store.state.hdfs.selectFunc
+        }
     },
-    created() {
-        getTimeLine({
-            path: '/Users/yangs/Desktop/trace.out',
-            count: 100,
-            name: 'DFSInputStream#byteArrayRead'
-        }).then(res => {
-            this.chartData = res;
-            // this.chartData.stack.func = res.columns
-        });
-        getFuncFeature({
-            path: '/Users/yangs/Desktop/trace.out'
-        }).then(res => {
-            this.funcData['columns'] = ['name', 'total'];
-            this.funcData['rows'] = res;
-        })
-
+    methods:{
+        changeTab(tab){
+          this.activeTab = tab.name;
+        },
+        getChartData(){
+            getTimeLine({
+                path: '/Users/yangs/Deskto/trace.out',
+                count: 100,
+                name: this.selectFunc
+            }).then(res => {
+                this.chartData = res;
+            });
+        }
     },
     watch: {
-      activeName (v) {
-        if(v=='time'){
-            this.$nextTick(_ => {
-            this.$refs['timeline'].echarts.resize()
-            })
+        activeTab (v) {
+            if(v=='time'){
+                this.$nextTick(_ => {
+                this.$refs['timeline'].echarts.resize()
+                })
+            }
+        },
+        selectFunc(v){
+            this.getChartData()
         }
-        if(v=='summary'){
-            this.$nextTick(_ => {
-                this.$refs['pie'].echarts.resize()
-            })
-        }
-      }
     }
 }
 </script>

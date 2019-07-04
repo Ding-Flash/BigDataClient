@@ -84,7 +84,7 @@
                     expand: 'expand',
                     children: 'childs'
                 },
-                cart_tree: {}
+                cart_tree: null
             }
         },
         methods: {

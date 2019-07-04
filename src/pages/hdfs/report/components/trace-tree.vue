@@ -41,14 +41,19 @@
 
     export default {
         name: 'trace-tree',
+        components: {OrgTree},
         created() {
-            getCallTree({
-                path: '/Users/yangs/Desktop/trace.out',
-                func_name: 'dataStreamer'
-            }).then(res => {
-                this.loading = false;
-                this.tree = res['res']
-            })
+            this.getTree()
+        },
+        computed:{
+            selectFunc: {
+                get: function () {
+                    return this.$store.state.hdfs.selectFunc
+                },
+                set: function (value) {
+                    this.$store.commit("hdfs/setSelectFunc", value)
+                }
+            }
         },
         data() {
             return {
@@ -64,10 +69,23 @@
                 }
             }
         },
-        components: {OrgTree},
+        watch:{
+            selectFunc(v){
+                this.getTree()
+            }
+        },
         methods: {
+            getTree(){
+             getCallTree({
+                    path: '/Users/yangs/Desktop/trace.out',
+                    func_name: this.selectFunc
+                }).then(res => {
+                    this.loading = false;
+                    this.tree = res['res']
+                })
+            },
             nodeRender(h, data) {
-                let b_type = data.name == 'dataStreamer' ? 'danger' : 'primary';
+                let b_type = data.name === this.selectFunc ? 'danger' : 'primary';
                 return (
                     <el-button type = {b_type} > {data.name}</el-button>
                 )
@@ -98,7 +116,4 @@
         /*background-color: #ebf1f6;*/
     }
 
-    .tree-bg {
-        /*background-color: #ebf1f6;*/
-    }
 </style>

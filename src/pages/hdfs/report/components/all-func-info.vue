@@ -99,6 +99,7 @@
                     <el-button
                             size="mini"
                             type="primary"
+                            @click="moveTimeline(scope.row.name)"
                     >timeline
                     </el-button>
                 </template>
@@ -130,8 +131,12 @@
         },
         methods:{
             moveTree(name){
-                console.log(name);
-                this.funcname = name;
+                this.$store.commit('hdfs/setSelectFunc', name);
+                this.$store.commit('hdfs/setActiveTab', 'tree')
+            },
+            moveTimeline(name){
+                this.$store.commit('hdfs/setSelectFunc', name);
+                this.$store.commit('hdfs/setActiveTab', 'time');
             }
         }
     }
