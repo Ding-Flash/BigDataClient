@@ -1,6 +1,7 @@
 // 菜单 顶栏
 export default [
-    {path: '/index', title: 'Home', icon: 'home'},
+    { path: '/index', title: 'Home', icon: 'home'},
+    { path: '/history', title: '任务清单', icon: 'history'},
     {
         title: 'BigRoots',
         icon: 'flask',
@@ -18,7 +19,7 @@ export default [
         ]
     },
     {
-        title: 'HDFS',
+        title: 'ASTracer',
         icon: 'database',
         children: [
             {path: '/hdfs/task', title: "新建任务", icon: 'tasks'},

@@ -36,7 +36,7 @@ export default {
         all_func,
     },
     created() {
-        this.getChartData()
+        this.getChartData();
         getFuncFeature({
             path: '/Users/yangs/Desktop/trace.out'
         }).then(res => {

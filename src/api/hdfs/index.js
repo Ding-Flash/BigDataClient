@@ -23,3 +23,18 @@ export function getTimeLine(data) {
         params: data
     })
 }
+
+export function createTask(data) {
+    return request({
+        url: '/hdfs/createtask',
+        method: 'GET',
+        params: data
+    })
+}
+
+export function getTaskList() {
+    return request({
+        url:"/hdfs/gettasklist",
+        method: "GET"
+    })
+}

@@ -21,6 +21,15 @@ const frameIn = [
         },
         component: () => import('@/pages/index')
       },
+      {
+        path: 'history',
+        name: 'history',
+        meta: {
+          auth: true,
+          title: '任务清单'
+        },
+        component: () => import('@/pages/history')
+      },
       // 刷新页面 必须保留
       {
         path: 'refresh',
@@ -49,7 +58,7 @@ const frameIn = [
   },
   hdfs,
   spark
-]
+];
 
 /**
  * 在主框架之外显示
