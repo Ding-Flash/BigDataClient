@@ -8,7 +8,7 @@
             <el-main style="align-items:center;">
                 <el-card
                         v-loading="loading"
-                        element-loading-text="Loading"
+                        element-loading-text="你需要选择一个函数"
                         element-loading-spinner="el-icon-loading"
                         class="tree-bg"
                 >
@@ -43,7 +43,9 @@
         name: 'trace-tree',
         components: {OrgTree},
         created() {
-            this.getTree()
+            if(this.selectFunc){
+                this.getTree()
+            }
         },
         computed:{
             selectFunc: {
@@ -77,7 +79,7 @@
         methods: {
             getTree(){
              getCallTree({
-                    path: '/Users/yangs/Desktop/trace.out',
+                    name: this.$store.state.hdfs.currentTaskName,
                     func_name: this.selectFunc
                 }).then(res => {
                     this.loading = false;

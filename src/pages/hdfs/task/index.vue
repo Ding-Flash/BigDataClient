@@ -117,6 +117,7 @@
     },
     methods: {
       onSubmit() {
+        // TODO 如果有完成的任务则不能创建新任务
         if(this.task.name==='') {
             this.$notify.error({
               title: '错误',

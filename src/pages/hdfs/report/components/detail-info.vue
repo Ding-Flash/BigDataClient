@@ -4,10 +4,10 @@
             <el-card style="background: #f0f9eb">
                 <div slot="header">
                     <d2-icon name="file-code-o"/>
-                    <span style="margin-left: 2%">File Size</span>
+                    <span style="margin-left: 2%">文件大小</span>
                 </div>
                 <div class="iCountUp">
-                    <ICountUp :endVal="253.2"/>
+                    <ICountUp :endVal="size"/>
                     MB
                 </div>
             </el-card>
@@ -16,10 +16,10 @@
             <el-card style="background: #f2f2f3">
                 <div slot="header">
                     <d2-icon name="code"/>
-                    <span style="margin-left: 2%">Function Type</span>
+                    <span style="margin-left: 2%">函数种类</span>
                 </div>
                 <div class="iCountUp">
-                    <ICountUp :endVal="38"/>
+                    <ICountUp :endVal="func_type"/>
                 </div>
             </el-card>
         </el-col>
@@ -27,10 +27,10 @@
             <el-card style="background: #fdf0f0">
                 <div slot="header">
                     <d2-icon name="code-fork"/>
-                    <span style="margin-left: 2%">Call Tree Type</span>
+                    <span style="margin-left: 2%">调用树种类</span>
                 </div>
                 <div class="iCountUp">
-                    <ICountUp :endVal="22"/>
+                    <ICountUp :endVal="tree_type"/>
                 </div>
             </el-card>
         </el-col>
@@ -39,15 +39,45 @@
 
 <script>
     import ICountUp from 'vue-countup-v2';
+    import {getTraceDetail} from "@/api/hdfs";
+
     export default {
         name: "detail-info",
         components:{
             ICountUp
         },
+        created(){
+            if(this.taskName){
+                this.getData()
+            }
+        },
         data() {
           return {
-            endVal: 300,
+              size: 0.0,
+              func_type: 0,
+              tree_type: 0
           };
+        },
+        computed:{
+            taskName: {
+                  get: function () {
+                      return this.$store.state.hdfs.currentTaskName
+                  }
+            }
+        },
+        watch:{
+          taskName(v){
+              this.getData()
+          }
+        },
+        methods: {
+            getData(){
+                getTraceDetail({name: this.taskName}).then(res=>{
+                    this.size = res.size;
+                    this.func_type = res.func_type;
+                    this.tree_type = res.tree_type;
+                })
+            }
         }
     }
 </script>

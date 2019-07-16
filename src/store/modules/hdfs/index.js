@@ -3,7 +3,8 @@ export default {
     state:{
         currentTask: {},
         activeTab : 'sampler',
-        selectFunc: ''
+        selectFunc: '',
+        currentTaskName: ''
     },
     mutations:{
         setTask(state, payload){
@@ -14,6 +15,9 @@ export default {
         },
         setSelectFunc(state, payload){
             state.selectFunc = payload;
+        },
+        setCurrentTaskName(state, payload){
+            state.currentTaskName = payload
         }
     },
     getters:{

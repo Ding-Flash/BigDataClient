@@ -38,3 +38,27 @@ export function getTaskList() {
         method: "GET"
     })
 }
+
+export function refreshBenchStatus(data) {
+    return request({
+        url: "/hdfs/refresh",
+        method: "GET",
+        params: data
+    })
+}
+
+export function deleteTask(data) {
+    return request({
+        url: "/hdfs/delete",
+        method: "GET",
+        params: data
+    })
+}
+
+export function getTraceDetail(data) {
+    return request({
+        url: "/hdfs/gettracedetail",
+        method: "GET",
+        params: data
+    })
+}

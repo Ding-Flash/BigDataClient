@@ -3,7 +3,7 @@
         <template slot="header">任务清单</template>
         <div style="margin: 1% 2%">
           <h3>ASTracer List</h3>
-          <el-table :data="astracer" height="250" border style="width: 100%">
+          <el-table :data="astracer" height="270" border style="width: 100%">
             <el-table-column type="index" :index="indexMethod">
             </el-table-column>
             <el-table-column prop="time" label="日期">
@@ -20,7 +20,11 @@
               <template slot-scope="scope">
                 <el-button
                   size="mini"
-                  @click="handleEdit(scope.$index, scope.row)">查看</el-button>
+                  type="primary"
+                  @click="refreshStatus(scope.$index, scope.row)">刷新状态</el-button>
+                <el-button
+                  size="mini"
+                  @click="lookReport(scope.$index, scope.row)">查看</el-button>
                 <el-button
                   size="mini"
                   type="danger"
@@ -71,10 +75,8 @@
             <el-table-column label="操作">
               <template slot-scope="scope">
                 <el-button
-                  size="mini"
                   @click="handleEdit(scope.$index, scope.row)">查看</el-button>
                 <el-button
-                  size="mini"
                   type="danger"
                   @click="handleDelete(scope.$index, scope.row)">删除</el-button>
               </template>
@@ -85,7 +87,7 @@
 </template>
 
 <script>
-    import {getTaskList} from "@/api/hdfs";
+    import {getTaskList, refreshBenchStatus, deleteTask} from "@/api/hdfs";
     export default {
         name: "history",
         created(){
@@ -102,11 +104,23 @@
             indexMethod(index){
                 return index
             },
-            handleEdit(index, row) {
-                console.log(index, row);
+            refreshStatus(index, row){
+                refreshBenchStatus({name: row.name}).then(res =>{
+                  if(res.status === 1){
+                    this.astracer[index].status = "finished"
+                  }
+                })
+            },
+            lookReport(index, row) {
+              this.$store.commit('hdfs/setCurrentTaskName', row.name);
+              this.$router.push({name: "hdfs-report"})
             },
             handleDelete(index, row) {
-                console.log(index, row);
+                deleteTask({name: row.name}).then(res => {
+                  if (res.status === 0){
+                    this.astracer.splice(index, 1);
+                  }
+                })
             }
         }
     }

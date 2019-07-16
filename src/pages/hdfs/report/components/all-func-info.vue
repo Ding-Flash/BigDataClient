@@ -122,12 +122,21 @@
             }
         },
         created() {
-            getFuncFeature({
-                path: '/Users/yangs/Desktop/trace.out'
-            }).then(res => {
-                this.loading = false;
-                this.funcData = res;
-            })
+            if(this.taskName){
+                this.getData()
+            }
+        },
+        computed:{
+            taskName: {
+                  get: function () {
+                      return this.$store.state.hdfs.currentTaskName
+                  }
+            }
+        },
+        watch:{
+          taskName(v){
+              this.getData()
+          }
         },
         methods:{
             moveTree(name){
@@ -137,6 +146,14 @@
             moveTimeline(name){
                 this.$store.commit('hdfs/setSelectFunc', name);
                 this.$store.commit('hdfs/setActiveTab', 'time');
+            },
+            getData(){
+                getFuncFeature({
+                    name: this.$store.state.hdfs.currentTaskName
+                }).then(res => {
+                    this.loading = false;
+                    this.funcData = res;
+                })
             }
         }
     }
