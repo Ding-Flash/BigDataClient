@@ -16,7 +16,7 @@
             </el-table-column>
             <el-table-column prop="status" label="任务状态">
             </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" fixed="right" width="250">
               <template slot-scope="scope">
                 <el-button
                   size="mini"
@@ -59,7 +59,7 @@
             </el-table-column>
           </el-table>
             <h3>BigRoot</h3>
-          <el-table :data="null" height="250" border style="width: 100%">
+          <el-table :data="null" height="250" border>
             <el-table-column type="index" :index="indexMethod">
             </el-table-column>
             <el-table-column prop="time" label="日期">
@@ -72,7 +72,7 @@
             </el-table-column>
             <el-table-column prop="status" label="任务状态">
             </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" min-width="250">
               <template slot-scope="scope">
                 <el-button
                   @click="handleEdit(scope.$index, scope.row)">查看</el-button>
@@ -102,7 +102,7 @@
         },
         methods: {
             indexMethod(index){
-                return index
+                return index + 1
             },
             refreshStatus(index, row){
                 refreshBenchStatus({name: row.name}).then(res =>{

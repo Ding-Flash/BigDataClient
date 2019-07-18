@@ -6,8 +6,8 @@ export default [
         title: 'BigRoots',
         icon: 'flask',
         children: [
-            {path: '', title: '新建任务', icon: 'tasks'},
-            {path: '', title: '历史报告', icon: 'clock-o'},
+            {path: '/bigroot/task', title: '新建任务', icon: 'tasks'},
+            {path: '/bigroot/report', title: 'BigRoot报告', icon: 'clock-o'},
         ]
     },
     {

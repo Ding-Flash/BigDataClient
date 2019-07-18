@@ -5,7 +5,7 @@
             <el-col :span="17">
                 <el-card style="overflow: auto" shadow="always">
                     <div slot="header">Straggler 检测</div>
-                    <div id="timeline" style="width: 1000px;height: 600px"></div>
+                    <div id="timeline" style="height: 600px"></div>
                 </el-card>
             </el-col>
             <el-col :span="7">
@@ -37,23 +37,22 @@
             </el-col>
         </el-row>
         <br>
-        <el-row>
-            <el-col :span="16">
-              <el-card>
-                    <div slot="header">Straggler 决策树生成</div>
-                    <div v-if="cart_tree">
-                        <org-tree
-                                :data="cart_tree"
-                                collapsable
-                                :node-render="nodeRender"
-                                :expand-all="true"
-                                :props="props"
-                        ></org-tree>
-                    </div>
-                </el-card>
-            </el-col>
-
-        </el-row>
+        <div>
+          <el-card>
+              <div slot="header">Straggler 决策树生成</div>
+                <el-row type="flex" justify="center">
+                <div v-if="cart_tree">
+                    <org-tree
+                            :data="cart_tree"
+                            collapsable
+                            :node-render="nodeRender"
+                            :expand-all="true"
+                            :props="props"
+                    ></org-tree>
+                </div>
+                </el-row>
+            </el-card>
+        </div>
     </d2-container>
 </template>
 

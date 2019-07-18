@@ -1,5 +1,6 @@
 import hdfs from './modules/hdfs'
 import spark from './modules/spark'
+import bigroot from './modules/bigroot'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
@@ -57,7 +58,8 @@ const frameIn = [
     ]
   },
   hdfs,
-  spark
+  spark,
+  bigroot
 ];
 
 /**

@@ -44,7 +44,11 @@ export default {
                     if(rdd === undefined){
                         rdd = "unkown"
                     }
-                    return 'Operator:'+ rdd + '<br> time: ' + params.value + '(ms)';
+                    let item = 'Operator:'+ rdd + '<br> time: ' + params.value + '(ms)';
+                    if(findStraggler(straggler, params.dataIndex, params.seriesIndex) === "Straggler"){
+                        item = 'Straggler Operator <br>' + item
+                    }
+                    return item;
                 }
             },
             xAxis:  {

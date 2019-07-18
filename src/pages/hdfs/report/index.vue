@@ -83,7 +83,7 @@ export default {
         activeTab (v) {
             if(v==='time'){
                 this.$nextTick(_ => {
-                this.$refs['timeline'].echarts.resize()
+                    this.$refs['timeline'].echarts.resize()
                 })
             }
         },
