@@ -37,7 +37,7 @@ export default {
         network = c.network;
         cpu = c.cpu;
         io = c.io;
-            var COMMONSTYLE = {
+        var COMMONSTYLE = {
         type: 'line',
         silent: true,
         animation: false,
@@ -55,7 +55,7 @@ export default {
         },
         legend: {
             color: ["#F58080", "#47D8BE", "#F9A589"],
-            data: ['NetWork', 'CPU', 'IO'],
+            data: ['NetWork', 'CPU', 'IO', 'c-straggler','i-straggler','n-straggler'],
             left: 'center',
             bottom: 'bottom'
         },
@@ -256,7 +256,7 @@ export default {
                 lineStyle: {
                     normal: {
                         color: "#626c91",
-                        type: 'dashed',
+                        type: 'dotted',
                         width: 3
                     },
                     emphasis: {
@@ -296,9 +296,9 @@ export default {
                 ]]
             }
         }, COMMONSTYLE));
-    // straggle 显示 图例
+    // cpu straggler 显示 图例
         option.series.push(Object.assign({
-            name: 'straggler',
+            name: 'c-straggler',
             markLine:{
                 silent: false,
                 animation: false,
@@ -309,6 +309,7 @@ export default {
                 },
                 lineStyle: {
                     normal: {
+                        // color: "#87300e",
                         color: "#626c91",
                         type: 'solid',
                         width: 5
@@ -367,17 +368,30 @@ export default {
                         symbol: 'none',
                         coord: [88, 0.58]
                     }
-                ],[
-                    {
-                        symbol: 'none',
-                        name:'io',
-                        coord: [60, 0.3]
-                    },
-                    {
-                        symbol: 'none',
-                        coord: [64, 0.3]
+                ]]
+            }
+        }, COMMONSTYLE));
+        option.series.push(Object.assign({
+            name: 'i-straggler',
+            markLine:{
+                silent: false,
+                animation: false,
+                label: {
+                    normal: {
+                        position: 'start'
                     }
-                ],[
+                },
+                lineStyle: {
+                    normal: {
+                        color: "#1a2940",
+                        type: 'solid',
+                        width: 5
+                    },
+                    emphasis: {
+                        color: "#d9def7"
+                    }
+                },
+                data:[[
                     {
                         symbol: 'none',
                         name:'io',
@@ -388,6 +402,39 @@ export default {
                         coord: [64, 0.25]
                     }
                 ],[
+                    {
+                        symbol: 'none',
+                        name:'io',
+                        coord: [60, 0.3]
+                    },
+                    {
+                        symbol: 'none',
+                        coord: [64, 0.3]
+                    }
+                ]]
+            }
+        }, COMMONSTYLE));
+        option.series.push(Object.assign({
+            name: 'n-straggler',
+            markLine:{
+                silent: false,
+                animation: false,
+                label: {
+                    normal: {
+                        position: 'start'
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        color: "#333333",
+                        type: 'solid',
+                        width: 5
+                    },
+                    emphasis: {
+                        color: "#d9def7"
+                    }
+                },
+                data:[[
                     {
                         symbol: 'none',
                         name:'network',
@@ -401,6 +448,238 @@ export default {
             }
         }, COMMONSTYLE));
         return option;
-    }
+    },
+    getSlaveOption: function (cpu, io, network, time, max_scala, tasks) {
+        let COMMONSTYLE = {
+            type: 'line',
+            silent: true,
+            animation: false,
+            symbolSize: 0,
+            hoverAnimation: false,
+            lineStyle: {
+                normal: {
+                    width: 3
+                }
+            }
+        };
+        let option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                color: ["#F58080", "#47D8BE", "#F9A589"],
+                data: ['NetWork', 'CPU', 'IO'],
+                left: 'center',
+                bottom: 'bottom'
+            },
+            grid: {
+                top: 'middle',
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                height: '80%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: [...Array(time).keys()],
+                axisLine: {
+                    lineStyle: {
+                        color: "#999"
+                    }
+                }
+            },
+            yAxis: [{
+                type: 'value',
+                name: 'feature scale',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed',
+                        color: '#DDD'
+                    }
+                },
+                axisLine: {
+                    show: false,
+                    lineStyle: {
+                        color: "#333"
+                    },
+                },
+                nameTextStyle: {
+                    color: "#999"
+                },
+                splitArea: {
+                    show: false
+                }
+            },{
+                type: 'value',
+                name: 'straggler',
+                min: 0,
+                max: Math.ceil(max_scala),
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed',
+                        color: '#DDD'
+                    }
+                },
+                axisLine: {
+                    show: false,
+                    lineStyle: {
+                        color: "#333"
+                    },
+                },
+                nameTextStyle: {
+                    color: "#999"
+                },
+                splitArea: {
+                    show: false
+                }
+            }],
+        series: [{
+                name: 'NetWork',
+                type: 'line',
+                data: network,
+                color: "#F58080",
+                lineStyle: {
+                    normal: {
+                        width: 2,
+                        color: {
+                            type: 'linear',
 
+                            colorStops: [{
+                                offset: 0,
+                                color: '#FFCAD4' // 0% 处的颜色
+                            }, {
+                                offset: 0.4,
+                                color: '#F58080' // 100% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: '#F58080' // 100% 处的颜色
+                            }],
+                            globalCoord: false // 缺省为 false
+                        },
+                        shadowColor: 'rgba(245,128,128, 0.5)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 7
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#F58080',
+                        borderWidth: 3,
+                        /*shadowColor: 'rgba(72,216,191, 0.3)',
+                         shadowBlur: 100,*/
+                        borderColor: "#F58080"
+                    }
+                },
+                smooth: true
+            },
+            {
+                name: 'CPU',
+                type: 'line',
+                data: cpu,
+                lineStyle: {
+                    normal: {
+                        width: 2,
+                        color: {
+                            type: 'linear',
+                            colorStops: [{
+                                    offset: 0,
+                                    color: '#AAF487' // 0% 处的颜色
+                                },
+                                {
+                                    offset: 0.4,
+                                    color: '#47D8BE' // 100% 处的颜色
+                                }, {
+                                    offset: 1,
+                                    color: '#47D8BE' // 100% 处的颜色
+                                }
+                            ],
+                            globalCoord: false // 缺省为 false
+                        },
+                        shadowColor: 'rgba(71,216,190, 0.5)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 7
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#AAF487',
+                        borderWidth: 3,
+                        /*shadowColor: 'rgba(72,216,191, 0.3)',
+                         shadowBlur: 100,*/
+                        borderColor: "#AAF487"
+                    }
+                },
+                smooth: true
+            },
+            {
+                name: 'IO',
+                type: 'line',
+                data: io,
+                lineStyle: {
+                    normal: {
+                        width: 2,
+                        color: {
+                            type: 'linear',
+
+                            colorStops: [{
+                                    offset: 0,
+                                    color: '#F6D06F' // 0% 处的颜色
+                                },
+                                {
+                                    offset: 0.4,
+                                    color: '#F9A589' // 100% 处的颜色
+                                }, {
+                                    offset: 1,
+                                    color: '#F9A589' // 100% 处的颜色
+                                }
+                            ],
+                            globalCoord: false // 缺省为 false
+                        },
+                        shadowColor: 'rgba(249,165,137, 0.5)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 7
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#F6D06F',
+                        borderWidth: 3,
+                        /*shadowColor: 'rgba(72,216,191, 0.3)',
+                         shadowBlur: 100,*/
+                        borderColor: "#F6D06F"
+                    }
+                },
+                smooth: true
+            }
+        ]
+    };
+
+    // cpu straggler 显示 图例
+        option.series.push(Object.assign({
+            name: 'c-straggler',
+            markLine:{
+                silent: false,
+                animation: false,
+                label: {
+                    normal: {
+                        position: 'start'
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        // color: "#87300e",
+                        color: "#626c91",
+                        type: 'solid',
+                        width: 5
+                    },
+                    emphasis: {
+                        color: "#d9def7"
+                    }
+                },
+                data: tasks
+            }
+        }, COMMONSTYLE));
+        return option;
+    }
 }
