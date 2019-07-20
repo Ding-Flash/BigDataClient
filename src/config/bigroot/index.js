@@ -470,7 +470,8 @@ export default {
                 color: ["#F58080", "#47D8BE", "#F9A589"],
                 data: ['NetWork', 'CPU', 'IO'],
                 left: 'center',
-                bottom: 'bottom'
+                // bottom: 'bottom'
+                top: 'top'
             },
             grid: {
                 top: 'middle',
@@ -512,7 +513,7 @@ export default {
                 }
             },{
                 type: 'value',
-                name: 'straggler',
+                name: 'straggler scala',
                 min: 0,
                 max: Math.ceil(max_scala),
                 splitLine: {
@@ -685,5 +686,39 @@ export default {
             }
         }, COMMONSTYLE));
         return option;
+    },
+    getPieOption: function (label, pie_data) {
+        let option = {
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: label
+            },
+            series : [
+                {
+                    name: '原因',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data: pie_data,
+                    label:{
+                        show:true,
+                        formatter:'{b}: {d}%'
+                    },
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        return option
     }
 }
