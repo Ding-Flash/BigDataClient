@@ -23,3 +23,10 @@ export  function getCartTree(data) {
         params: data
     })
 }
+
+export function getsTaskList() {
+    return request({
+        url: '/spark/gettasklist',
+        method: 'GET'
+    })
+}

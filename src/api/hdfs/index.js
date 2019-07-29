@@ -32,7 +32,7 @@ export function createTask(data) {
     })
 }
 
-export function getTaskList() {
+export function gethTaskList() {
     return request({
         url:"/hdfs/gettasklist",
         method: "GET"

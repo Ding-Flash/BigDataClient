@@ -7,3 +7,10 @@ export function getBigRootStraggler(data){
         params: data
     })
 }
+
+export function getbTaskList() {
+    return request({
+        url: "/bigroot/gettasklist",
+        method: 'GET'
+    })
+}
