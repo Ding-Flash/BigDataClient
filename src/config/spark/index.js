@@ -40,7 +40,7 @@ export default {
             tooltip : {
                 trigger: 'item',
                 formatter: function (params) {
-                    let rdd = op[params.seriesIndex];
+                    let rdd = op[params.seriesIndex*2+1].split("_")[0];
                     if(rdd === undefined){
                         rdd = "unkown"
                     }

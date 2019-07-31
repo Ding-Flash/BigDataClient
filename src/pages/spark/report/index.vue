@@ -64,7 +64,7 @@
     export default {
         name: "index",
         created() {
-            getTaskTimeline({}).then(res => {
+            getTaskTimeline({name:'spark-test'}).then(res => {
                 res = res.data;
                 this.getTimeline(res);
             });
@@ -89,16 +89,17 @@
         methods: {
             getTimeline(data){
                 let timeline = echarts.init(document.getElementById('timeline'));
-                let option = config.getTimelineConfig(data.task_number, data.op_list, data.straggler_op_position_list, data.op_name_list);
+                console.log(data);
+                let option = config.getTimelineConfig(data.task_num, data.op_list, data.straggler_op_location_list, data.op_name_list);
                 timeline.setOption(option, {notMerge: true})
             },
             getStraggler(data){
-                getStraggler({}).then(res => {
+                getStraggler({name:'spark-test'}).then(res => {
                     this.stragglers = res.data.straggler_type;
                 })
             },
             getTree(data){
-                getCartTree({}).then(res => {
+                getCartTree({name:'spark-test'}).then(res => {
                     this.cart_tree = res
                 })
             },

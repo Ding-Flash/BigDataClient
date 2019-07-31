@@ -8,9 +8,10 @@ export function getBigRootStraggler(data){
     })
 }
 
-export function getbTaskList() {
+export function getbTaskList(data) {
     return request({
         url: "/bigroot/gettasklist",
-        method: 'GET'
+        method: 'GET',
+        params: data
     })
 }

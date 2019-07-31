@@ -47,7 +47,7 @@
           }
         },
         mounted() {
-            getBigRootStraggler({}).then(res=>{
+            getBigRootStraggler({name: 'bigroot-test'}).then(res=>{
                 this.slaves = res.data;
                 this.$nextTick(()=>{
                     this.renderSlaves(this.slaves)
