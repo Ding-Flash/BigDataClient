@@ -16,7 +16,7 @@
         flex="dir:top main:justify cross:center box:justify">
         <div class="page-login--content-header">
           <p class="page-login--content-header-motto">
-            时间是一切财富中最宝贵的财富。 <span>—— 德奥弗拉斯多</span>
+            
           </p>
         </div>
         <div
@@ -38,14 +38,14 @@
                     <i slot="prepend" class="fa fa-keyboard-o"></i>
                   </el-input>
                 </el-form-item>
-                <el-form-item prop="code">
-                  <el-input type="text" v-model="formLogin.code" placeholder="- - - -">
-                    <template slot="prepend">验证码</template>
-                    <template slot="append">
-                      <img class="login-code" src="./image/login-code.png">
-                    </template>
-                  </el-input>
-                </el-form-item>
+<!--                <el-form-item prop="code">-->
+<!--                  <el-input type="text" v-model="formLogin.code" placeholder="- - - -">-->
+<!--                    <template slot="prepend">验证码</template>-->
+<!--                    <template slot="append">-->
+<!--                      <img class="login-code" src="./image/login-code.png">-->
+<!--                    </template>-->
+<!--                  </el-input>-->
+<!--                </el-form-item>-->
                 <el-button size="default" @click="submit" type="primary" class="button-login">登录</el-button>
               </el-form>
             </el-card>
