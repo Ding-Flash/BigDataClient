@@ -66,13 +66,13 @@
                 <template slot-scope="scope">
                 <span v-if="scope.row.std < scope.row.mean">
                     <d2-icon
-                            name="check-circle"
+                            name="thumbs-up"
                             style="font-size: 20px; line-height: 32px; color: #67C23A;"
                             slot="active"/>
                 </span>
-                    <span v-else>
+                <span v-else>
                     <d2-icon
-                            name="times-circle"
+                            name="thumbs-down"
                             style="font-size: 20px; line-height: 32px; color: #F56C6C;"
                             slot="inactive"/>
                 </span>

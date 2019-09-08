@@ -1,6 +1,6 @@
 <template>
     <d2-container>
-        <template slot="header">测试任务</template>
+        <template slot="header">Spark分析报告</template>
         <el-row :gutter="20">
             <el-col :span="17">
                 <el-card style="overflow: auto" shadow="always">
@@ -64,12 +64,24 @@
     export default {
         name: "index",
         created() {
-            getTaskTimeline({name:'spark-test'}).then(res => {
-                res = res.data;
-                this.getTimeline(res);
-            });
-            this.getStraggler();
-            this.getTree();
+            let task_name = this.$store.state.bigroot.currentTaskName;
+            if (task_name === '') {
+                this.$router.push({name: 'history'});
+                this.$notify({
+                    title: '注意',
+                    message: '请选择或创建task',
+                    type: 'warning'
+                });
+            }
+            else {
+                getTaskTimeline({name: task_name}).then(res => {
+                    res = res.data;
+                    this.getTimeline(res);
+                });
+                this.getStraggler(task_name);
+                this.getTree(task_name);
+            }
+
         },
         components: {OrgTree},
         data() {
@@ -89,17 +101,17 @@
         methods: {
             getTimeline(data){
                 let timeline = echarts.init(document.getElementById('timeline'));
-                console.log(data);
+                // console.log(data);
                 let option = config.getTimelineConfig(data.task_num, data.op_list, data.straggler_op_location_list, data.op_name_list);
                 timeline.setOption(option, {notMerge: true})
             },
-            getStraggler(data){
-                getStraggler({name:'spark-test'}).then(res => {
+            getStraggler(task){
+                getStraggler({name:task}).then(res => {
                     this.stragglers = res.data.straggler_type;
                 })
             },
-            getTree(data){
-                getCartTree({name:'spark-test'}).then(res => {
+            getTree(task){
+                getCartTree({name:task}).then(res => {
                     this.cart_tree = res
                 })
             },

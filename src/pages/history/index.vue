@@ -18,15 +18,15 @@
               <template slot-scope="scope">
                 <el-button
                   size="mini"
-                  @click="handleEdit(scope.$index, scope.row)">查看</el-button>
+                  @click="lookBigRootReport(scope.$index, scope.row)">查看</el-button>
                 <el-button
                   size="mini"
                   type="danger"
-                  @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                  @click="handleBigRootDelete(scope.$index, scope.row)">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
-                    <h3>Spark List</h3>
+          <h3>Spark List</h3>
           <el-table :data="spark" height="250" border style="width: 100%">
             <el-table-column type="index">
             </el-table-column>
@@ -42,11 +42,11 @@
               <template slot-scope="scope">
                 <el-button
                   size="mini"
-                  @click="handleEdit(scope.$index, scope.row)">查看</el-button>
+                  @click="lookSparkReport(scope.$index, scope.row)">查看</el-button>
                 <el-button
                   size="mini"
                   type="danger"
-                  @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                  @click="handleSparkDelete(scope.$index, scope.row)">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -110,6 +110,25 @@
             }
         },
         methods: {
+            // BigRoot相关操作
+            lookBigRootReport(index, row){
+              this.$store.commit('bigroot/setCurrentTaskName', row.name);
+              this.$router.push({name: 'bigroot-report'})
+            },
+            handleBigRootDelete(index, row){
+
+            },
+
+            // Spark相关操作
+            lookSparkReport(index, row){
+              this.$store.commit('spark/setCurrentTaskName', row.name);
+              this.$router.push({name: 'spark-report'})
+            },
+            handleSparkDelete(index, row){
+
+            },
+
+            // Htrace相关操作
             refreshHDFSStatus(index, row){
                 refreshBenchStatus({name: row.name}).then(res =>{
                   if(res.status === 1){

@@ -47,12 +47,23 @@
           }
         },
         mounted() {
-            getBigRootStraggler({name: 'bigroot-test'}).then(res=>{
-                this.slaves = res.data;
-                this.$nextTick(()=>{
-                    this.renderSlaves(this.slaves)
+            let task_name = this.$store.state.bigroot.currentTaskName;
+            if (task_name === '') {
+                this.$router.push({name: 'history'});
+                this.$notify({
+                    title: '注意',
+                    message: '请选择或创建task',
+                    type: 'warning'
+                });
+            } else {
+                getBigRootStraggler({name: task_name}).then(res=>{
+                    this.slaves = res.data;
+                    this.$nextTick(()=>{
+                        this.renderSlaves(this.slaves)
+                    })
                 })
-            })
+            }
+
         },
         methods:{
             renderSlaves(sdata){
