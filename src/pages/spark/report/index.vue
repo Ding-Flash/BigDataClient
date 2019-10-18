@@ -64,7 +64,7 @@
     export default {
         name: "index",
         created() {
-            let task_name = this.$store.state.bigroot.currentTaskName;
+            let task_name = this.$store.state.spark.currentTaskName;
             if (task_name === '') {
                 this.$router.push({name: 'history'});
                 this.$notify({

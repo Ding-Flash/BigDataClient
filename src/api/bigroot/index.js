@@ -15,3 +15,11 @@ export function getbTaskList(data) {
         params: data
     })
 }
+
+export function deleteBigRootTask(data) {
+    return request({
+        url: "/bigroot/delete",
+        method: 'GET',
+        params: data
+    })
+}

@@ -47,7 +47,7 @@ export function refreshBenchStatus(data) {
     })
 }
 
-export function deleteTask(data) {
+export function deleteHDFSTask(data) {
     return request({
         url: "/hdfs/delete",
         method: "GET",

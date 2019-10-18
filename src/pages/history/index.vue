@@ -69,6 +69,7 @@
                 <el-button
                   size="mini"
                   type="primary"
+                  :disabled="scope.row.status==='finshed'"
                   @click="refreshHDFSStatus(scope.$index, scope.row)">刷新状态</el-button>
                 <el-button
                   size="mini"
@@ -85,9 +86,9 @@
 </template>
 
 <script>
-    import {gethTaskList, refreshBenchStatus, deleteTask} from "@/api/hdfs";
-    import {getsTaskList} from "@/api/spark";
-    import {getbTaskList} from "@/api/bigroot";
+    import {gethTaskList, refreshBenchStatus, deleteHDFSTask} from "@/api/hdfs";
+    import {getsTaskList, deleteSparkTask} from "@/api/spark";
+    import {getbTaskList, deleteBigRootTask} from "@/api/bigroot";
 
     export default {
         name: "history",
@@ -116,7 +117,11 @@
               this.$router.push({name: 'bigroot-report'})
             },
             handleBigRootDelete(index, row){
-
+                deleteBigRootTask({name: row.name}).then(res => {
+                  if (res.status === 0){
+                    this.bigroot.splice(index, 1);
+                  }
+                })
             },
 
             // Spark相关操作
@@ -125,10 +130,15 @@
               this.$router.push({name: 'spark-report'})
             },
             handleSparkDelete(index, row){
-
+                console.log(deleteSparkTask)
+                deleteSparkTask({name: row.name}).then(res => {
+                  if (res.status === 0){
+                    this.spark.splice(index, 1);
+                  }
+                })
             },
 
-            // Htrace相关操作
+            // ASTracer 相关操作
             refreshHDFSStatus(index, row){
                 refreshBenchStatus({name: row.name}).then(res =>{
                   if(res.status === 1){
@@ -141,7 +151,7 @@
               this.$router.push({name: "hdfs-report"})
             },
             handleHDFSDelete(index, row) {
-                deleteTask({name: row.name}).then(res => {
+                deleteHDFSTask({name: row.name}).then(res => {
                   if (res.status === 0){
                     this.astracer.splice(index, 1);
                   }

@@ -32,7 +32,7 @@ export default {
                 }
             })
         }
-        return {
+        let res =  {
             title:{
                 show: true,
                 // text: "Task-op"
@@ -65,7 +65,11 @@ export default {
                 // { type: 'inside', xAxisIndex: 0, start: 0, end: 90 },
             ],
             series: series
+        };
+        if(taskNum > 20){
+            res.dataZoom.push({ type: 'inside', yAxisIndex: 0, start: 0, end: 10 })
         }
+        return res
     },
     featuresLabels: [
         "Long_Serialization",

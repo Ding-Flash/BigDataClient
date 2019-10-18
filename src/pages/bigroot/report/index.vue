@@ -67,8 +67,7 @@
         },
         methods:{
             renderSlaves(sdata){
-                for (let i = 1; i <= 4; i++){
-
+                for (let i = 1; i <= sdata.length; i++){
                     let data = sdata[i-1];
                     let root = echarts.init(document.getElementById('slave'+i));
                     let option = config.getSlaveOption(data.cpu, data.io, data.net, data.time, data.scala, data.tasks);

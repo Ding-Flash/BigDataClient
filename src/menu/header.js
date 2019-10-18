@@ -6,7 +6,7 @@ export default [
         title: 'BigRoots',
         icon: 'flask',
         children: [
-            {path: '/bigroot/task', title: '新建任务', icon: 'tasks'},
+            // {path: '/bigroot/task', title: '新建任务', icon: 'tasks'},
             {path: '/bigroot/report', title: 'BigRoot检测报告', icon: 'clock-o'},
         ]
     },
@@ -14,7 +14,7 @@ export default [
         title: 'Spark',
         icon: 'bolt',
         children: [
-            {path: '/spark/task', title: '新建Spark分析任务', icon: 'tasks'},
+            // {path: '/spark/task', title: '新建Spark分析任务', icon: 'tasks'},
             {path: '/spark/report', title: 'Spark检测报告', icon: 'clock-o'},
         ]
     },

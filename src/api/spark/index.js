@@ -30,3 +30,11 @@ export function getsTaskList() {
         method: 'GET'
     })
 }
+
+export function deleteSparkTask(data) {
+    return request({
+        url: "/spark/delete",
+        method: 'GET',
+        params: data
+    })
+}

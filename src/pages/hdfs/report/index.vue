@@ -36,9 +36,19 @@ export default {
         all_func,
     },
     created() {
-        if(this.selectFunc){
-           this.getChartData();
-           this.loading = false
+        let task_name = this.$store.state.hdfs.currentTaskName;
+        if (task_name === '') {
+            this.$router.push({name: 'history'});
+            this.$notify({
+                title: '注意',
+                message: '请选择或创建task',
+                type: 'warning'
+            });
+        } else {
+            if(this.selectFunc){
+               this.getChartData();
+               this.loading = false
+            }
         }
     },
     data() {
