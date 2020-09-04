@@ -58,6 +58,7 @@
             } else {
                 getBigRootStraggler({name: task_name}).then(res=>{
                     this.slaves = res.data;
+                    console.log(res.data);
                     this.$nextTick(()=>{
                         this.renderSlaves(this.slaves)
                     })

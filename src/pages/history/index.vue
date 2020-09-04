@@ -81,6 +81,30 @@
               </template>
             </el-table-column>
           </el-table>
+          <h3>ALiload List</h3>
+          <el-table :data="aliload" height="250" border style="width: 100%">
+            <el-table-column type="index">
+            </el-table-column>
+            <el-table-column prop="time" label="日期">
+            </el-table-column>
+            <el-table-column prop="rate" label="读写速率">
+            </el-table-column>
+            <el-table-column prop="start" label="开始时间">
+            </el-table-column>
+            <el-table-column prop="end" label="结束时间">
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button
+                  size="mini"
+                  @click="lookAliloadReport(scope.$index, scope.row)">查看</el-button>
+                <el-button
+                  size="mini"
+                  type="danger"
+                  @click="handleAliloadDelete(scope.$index, scope.row)">删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
         </div>
     </d2-container>
 </template>
@@ -89,6 +113,7 @@
     import {gethTaskList, refreshBenchStatus, deleteHDFSTask} from "@/api/hdfs";
     import {getsTaskList, deleteSparkTask} from "@/api/spark";
     import {getbTaskList, deleteBigRootTask} from "@/api/bigroot";
+    import {getaTaskList, deleteAliloadTask} from "@/api/aliload";
 
     export default {
         name: "history",
@@ -101,13 +126,17 @@
           });
           getbTaskList().then(res => {
               this.bigroot = res.data
+          });
+          getaTaskList().then(res=>{
+              this.aliload = res.data
           })
         },
         data(){
             return{
                 astracer: null,
                 spark: null,
-                bigroot: null
+                bigroot: null,
+                aliload: null,
             }
         },
         methods: {
@@ -156,7 +185,20 @@
                     this.astracer.splice(index, 1);
                   }
                 })
-            }
+            },
+
+            // Aliload相关操作
+            lookAliloadReport(index, row){
+              this.$store.commit('aliload/setCurrentTaskName', row.name);
+              this.$router.push({name: 'aliload'})
+            },
+            handleAliloadDelete(index, row){
+                deleteAliloadTask({name: row.name}).then(res => {
+                  if (res.status === 0){
+                    this.aliload.splice(index, 1);
+                  }
+                })
+            },
         }
     }
 </script>

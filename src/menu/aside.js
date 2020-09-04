@@ -25,5 +25,6 @@ export default [
       { path: '/hdfs/task', title: "新建任务", icon: 'tasks'},
       { path: '/hdfs/report', title: "ASTracer检测报告", icon: 'bar-chart-o'},
     ]
-  }
+  },
+  { path: '/aliload', title: '负载生成', icon: 'spinner'}
 ]

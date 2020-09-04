@@ -31,6 +31,15 @@ const frameIn = [
         },
         component: () => import('@/pages/history')
       },
+      {
+        path: 'aliload',
+        name: 'aliload',
+        meta: {
+          auth: true,
+          title: '负载生成'
+        },
+        component: () => import('@/pages/aliload')
+      },
       // 刷新页面 必须保留
       {
         path: 'refresh',
