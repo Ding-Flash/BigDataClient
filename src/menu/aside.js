@@ -26,5 +26,6 @@ export default [
       { path: '/hdfs/report', title: "ASTracer检测报告", icon: 'bar-chart-o'},
     ]
   },
+  { path: '/taskopt', title: '参数优化', icon: 'line-chart'},
   { path: '/aliload', title: '负载生成', icon: 'spinner'}
 ]

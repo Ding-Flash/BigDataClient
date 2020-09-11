@@ -105,6 +105,32 @@
               </template>
             </el-table-column>
           </el-table>
+          <h3>Parameter Optimization Task List</h3>
+          <el-table :data="taskopt" height="250" border style="width: 100%">
+            <el-table-column type="index">
+            </el-table-column>
+            <el-table-column prop="name" label="任务名称">
+            </el-table-column>
+            <el-table-column prop="time" label="日期">
+            </el-table-column>
+            <el-table-column prop="class" label="java类">
+            </el-table-column>
+            <el-table-column prop="model" label="模型">
+            </el-table-column>
+            <el-table-column prop="train_time" label="训练次数">
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button
+                  size="mini"
+                  @click="lookAliloadReport(scope.$index, scope.row)">查看</el-button>
+                <el-button
+                  size="mini"
+                  type="danger"
+                  @click="handleAliloadDelete(scope.$index, scope.row)">删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
         </div>
     </d2-container>
 </template>
@@ -114,6 +140,7 @@
     import {getsTaskList, deleteSparkTask} from "@/api/spark";
     import {getbTaskList, deleteBigRootTask} from "@/api/bigroot";
     import {getaTaskList, deleteAliloadTask} from "@/api/aliload";
+    import {gettTaskOptList, deleteTaskOpt} from "@/api/taskopt";
 
     export default {
         name: "history",
@@ -129,6 +156,9 @@
           });
           getaTaskList().then(res=>{
               this.aliload = res.data
+          });
+          gettTaskOptList().then(res=>{
+              this.taskopt = res.data
           })
         },
         data(){
@@ -137,6 +167,7 @@
                 spark: null,
                 bigroot: null,
                 aliload: null,
+                taskopt: null,
             }
         },
         methods: {
@@ -159,7 +190,6 @@
               this.$router.push({name: 'spark-report'})
             },
             handleSparkDelete(index, row){
-                console.log(deleteSparkTask)
                 deleteSparkTask({name: row.name}).then(res => {
                   if (res.status === 0){
                     this.spark.splice(index, 1);
@@ -199,6 +229,9 @@
                   }
                 })
             },
+
+            // TaskOpt相关操作
+
         }
     }
 </script>
