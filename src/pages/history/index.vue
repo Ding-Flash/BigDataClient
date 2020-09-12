@@ -109,9 +109,9 @@
           <el-table :data="taskopt" height="250" border style="width: 100%">
             <el-table-column type="index">
             </el-table-column>
-            <el-table-column prop="name" label="任务名称">
-            </el-table-column>
             <el-table-column prop="time" label="日期">
+            </el-table-column>
+            <el-table-column prop="name" label="任务名称">
             </el-table-column>
             <el-table-column prop="class" label="java类">
             </el-table-column>
@@ -123,11 +123,11 @@
               <template slot-scope="scope">
                 <el-button
                   size="mini"
-                  @click="lookAliloadReport(scope.$index, scope.row)">查看</el-button>
+                  @click="lookTaskOptReport(scope.$index, scope.row)">查看</el-button>
                 <el-button
                   size="mini"
                   type="danger"
-                  @click="handleAliloadDelete(scope.$index, scope.row)">删除</el-button>
+                  @click="handleTaskOptDelete(scope.$index, scope.row)">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -231,7 +231,17 @@
             },
 
             // TaskOpt相关操作
-
+            lookTaskOptReport(index, row) {
+              this.$store.commit('taskopt/setCurrentTaskName', row.name);
+              this.$router.push({name: 'taskopt'})
+            },
+            handleTaskOptDelete(index, row){
+              deleteTaskOpt({name: row.name}).then(res=>{
+                if(res.status == 0) {
+                  this.taskopt.splice(index, 1);
+                }
+              })
+            },
         }
     }
 </script>

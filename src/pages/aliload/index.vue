@@ -23,7 +23,7 @@
     import config from "@/config/aliload/index"
     import {getAliLoadStatus} from '@/api/aliload/index'
     export default {
-        name: "index.vue",
+        name: "index",
         data() {
           return {
               slaves: null
@@ -41,7 +41,6 @@
             } else {
                 getAliLoadStatus({name: task_name}).then(res => {
                     this.slaves = res.data;
-                    console.log(res.data);
                     this.$nextTick(() => {
                         this.renderSlaves(this.slaves)
                     })

@@ -6,6 +6,7 @@ import hdfs from './modules/hdfs'
 import bigroot from './modules/bigroot'
 import spark from './modules/spark'
 import aliload from './modules/aliload'
+import taskopt from './modules/taskopt'
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     hdfs,
     bigroot,
     spark,
-    aliload
+    aliload,
+    taskopt,
   }
 })

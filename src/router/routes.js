@@ -39,7 +39,8 @@ const frameIn = [
           title: '负载生成'
         },
         component: () => import('@/pages/aliload')
-      },{
+      },
+      {
         path: 'taskopt',
         name: 'taskopt',
         meta: {
