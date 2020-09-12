@@ -13,9 +13,9 @@
                   <d2-highlight :code="cmd"/>
                 </el-card>
                 <br>
-                <el-card>
+                <el-card v-if="tune">
                     <div slot="header">调优参数列表</div>
-                    <el-table v-if="tune"
+                    <el-table
                       :data="tune"
                       style="width: 100%">
                       <el-table-column

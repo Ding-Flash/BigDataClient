@@ -5,7 +5,7 @@ export default {
                 trigger: 'axis'
             },
             legend: {
-                color: ["#F58080", "#47D8BE", "#F9A589"],
+                color: ["#F58080","#3628F5", "#47D8BE", "#F9A589", "#6F6F6F"],
                 data: ['NetWork(Receive)', 'NetWork(Send)', 'CPU', 'IO(Read)', 'IO(Write)'],
                 left: 'center',
                 // bottom: 'bottom'
@@ -92,23 +92,23 @@ export default {
                 name: 'NetWork(Send)',
                 type: 'line',
                 data: net_tx,
-                // color: "#F58080",
+                color: "#3628F5",
                 lineStyle: {
                     normal: {
                         width: 2,
                         color: {
                             type: 'linear',
-                            //
-                            // colorStops: [{
-                            //     offset: 0,
-                            //     color: '#FFCAD4' // 0% 处的颜色
-                            // }, {
-                            //     offset: 0.4,
-                            //     color: '#F58080' // 100% 处的颜色
-                            // }, {
-                            //     offset: 1,
-                            //     color: '#F58080' // 100% 处的颜色
-                            // }],
+
+                            colorStops: [{
+                                offset: 0,
+                                color: '#A2BDFF' // 0% 处的颜色
+                            }, {
+                                offset: 0.4,
+                                color: '#778ff5' // 100% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: '#4C5DF5' // 100% 处的颜色
+                            }],
                             globalCoord: false // 缺省为 false
                         },
                         // shadowColor: 'rgba(245,128,128, 0.5)',
@@ -118,11 +118,11 @@ export default {
                 },
                 itemStyle: {
                     normal: {
-                        color: '#F58080',
+                        color: '#A2BDFF',
                         borderWidth: 3,
                         /*shadowColor: 'rgba(72,216,191, 0.3)',
                          shadowBlur: 100,*/
-                        borderColor: "#F58080"
+                        borderColor: "#A2BDFF"
                     }
                 },
                 smooth: true
@@ -210,6 +210,7 @@ export default {
                 name: 'IO(Write)',
                 type: 'line',
                 data: iow,
+                color: "#6F6F6F",
                 lineStyle: {
                     normal: {
                         width: 2,
@@ -237,11 +238,11 @@ export default {
                 },
                 itemStyle: {
                     normal: {
-                        color: '#F6D06F',
+                        color: '#6F6F6F',
                         borderWidth: 3,
                         /*shadowColor: 'rgba(72,216,191, 0.3)',
                          shadowBlur: 100,*/
-                        borderColor: "#F6D06F"
+                        borderColor: "#AEAEB3"
                     }
                 },
                 smooth: true
@@ -253,39 +254,5 @@ export default {
         ],
     };
         return option;
-    },
-    getPieOption: function (label, pie_data) {
-        let option = {
-            tooltip : {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-            legend: {
-                orient: 'vertical',
-                left: 'left',
-                data: label
-            },
-            series : [
-                {
-                    name: '原因',
-                    type: 'pie',
-                    radius : '55%',
-                    center: ['50%', '60%'],
-                    data: pie_data,
-                    label:{
-                        show:true,
-                        formatter:'{b}: {d}%'
-                    },
-                    itemStyle: {
-                        emphasis: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
-                    }
-                }
-            ]
-        };
-        return option
     }
 }
