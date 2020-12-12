@@ -5,8 +5,8 @@ export default {
                 trigger: 'axis'
             },
             legend: {
-                color: ["#F58080","#3628F5", "#47D8BE", "#F9A589", "#6F6F6F"],
-                data: ['NetWork(Receive)', 'NetWork(Send)', 'CPU', 'IO(Read)', 'IO(Write)'],
+                color: ["#F58080","#3628F5", "#47D8BE", "#6F6F6F"],
+                data: ['NetWork(Receive)', 'NetWork(Send)', 'CPU', 'IO'],
                 left: 'center',
                 // bottom: 'bottom'
                 top: 'top'
@@ -166,48 +166,48 @@ export default {
                 },
                 smooth: true
             },
+            // {
+            //     name: 'IO(Read)',
+            //     type: 'line',
+            //     data: ior,
+            //     lineStyle: {
+            //         normal: {
+            //             width: 2,
+            //             color: {
+            //                 type: 'linear',
+            //
+            //                 colorStops: [{
+            //                         offset: 0,
+            //                         color: '#F6D06F' // 0% 处的颜色
+            //                     },
+            //                     {
+            //                         offset: 0.4,
+            //                         color: '#F9A589' // 100% 处的颜色
+            //                     }, {
+            //                         offset: 1,
+            //                         color: '#F9A589' // 100% 处的颜色
+            //                     }
+            //                 ],
+            //                 globalCoord: false // 缺省为 false
+            //             },
+            //             shadowColor: 'rgba(249,165,137, 0.5)',
+            //             shadowBlur: 10,
+            //             shadowOffsetY: 7
+            //         }
+            //     },
+            //     itemStyle: {
+            //         normal: {
+            //             color: '#F6D06F',
+            //             borderWidth: 3,
+            //             /*shadowColor: 'rgba(72,216,191, 0.3)',
+            //              shadowBlur: 100,*/
+            //             borderColor: "#F6D06F"
+            //         }
+            //     },
+            //     smooth: true
+            // },
             {
-                name: 'IO(Read)',
-                type: 'line',
-                data: ior,
-                lineStyle: {
-                    normal: {
-                        width: 2,
-                        color: {
-                            type: 'linear',
-
-                            colorStops: [{
-                                    offset: 0,
-                                    color: '#F6D06F' // 0% 处的颜色
-                                },
-                                {
-                                    offset: 0.4,
-                                    color: '#F9A589' // 100% 处的颜色
-                                }, {
-                                    offset: 1,
-                                    color: '#F9A589' // 100% 处的颜色
-                                }
-                            ],
-                            globalCoord: false // 缺省为 false
-                        },
-                        shadowColor: 'rgba(249,165,137, 0.5)',
-                        shadowBlur: 10,
-                        shadowOffsetY: 7
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#F6D06F',
-                        borderWidth: 3,
-                        /*shadowColor: 'rgba(72,216,191, 0.3)',
-                         shadowBlur: 100,*/
-                        borderColor: "#F6D06F"
-                    }
-                },
-                smooth: true
-            },
-            {
-                name: 'IO(Write)',
+                name: 'IO',
                 type: 'line',
                 data: iow,
                 color: "#6F6F6F",
